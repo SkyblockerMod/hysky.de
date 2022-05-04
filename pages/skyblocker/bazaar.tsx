@@ -30,10 +30,6 @@ function Bazaar({ fallback }: { fallback: Bazaar[] }) {
     const [input, setInput] = useState('')
     const [page, setPage] = useState(1)
     // there should be no `undefined` state
-    console.log("Is data ready?", !!data);
-    console.log("Is data ready?", !!fallback)
-    console.log(process.env.NODE_ENV=="production"?"hi":"no")
-    console.log("https://"+process.env.NODE_ENV=="production"?"":"staging."+"hysky.de")
 
     if (error) return "An error has occurred.";
     if (!data) return (<div className='text-center'> Loading... </div>)
