@@ -7,9 +7,9 @@ import { useState } from "react";
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 let API: string
-if(process.env.NODE_ENV=="production") API = 'https://hysky.de/api/raw/bazaar'
+if(process.env.NODE_ENV=="production") API = 'https://hysky.de/api/auctions'
 
-else  API = 'https://staging.hysky.de/api/raw/bazaar'
+else  API = 'https://staging.hysky.de/api/auctions'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const auction = await fetcher(API);
