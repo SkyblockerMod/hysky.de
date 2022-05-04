@@ -1,0 +1,882 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Hysky API Documentation",
+    "description": "Hysky offers several APIs. \n\nHysky uses a custom fork of maroapi for auctions and bazaar [https://github.com/SkyblockerMod/MaroAPI](https://github.com/SkyblockerMod/MaroAPI)",
+    "termsOfService": "https://hysky.de/tos",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "0.1",
+    "x-logo": {
+      "url": "https://hysky.de/skyblocker.png",
+      "altText": "Skyblocker logo"
+    }
+  },
+  "externalDocs": {
+    "description": "Skyblocker mod Wiki",
+    "url": "https://github.com/SkyblockerMod/Skyblocker/wiki/"
+  },
+  "servers": [
+    {
+      "url": "https://hysky.de"
+    }
+  ],
+  "tags": [
+    {
+      "name": "SkyBlock"
+    }
+  ],
+  "paths": {
+    "/api/networth": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Networth calculator",
+        "description": "Shows the networth of user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "Minecraft username",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Wohlhabend"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Networth"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Hypixel API token provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": 403,
+                  "reason": "Invalid Hypixel API token provided"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Inventory api is deactivated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": 404,
+                  "reason": "inventory api is deactivated"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Wrong username or API token provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": 422,
+                  "reason": "Request failed with status code 422"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/items": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Item informations",
+        "description": "Displays [https://github.com/NotEnoughUpdates/NotEnoughUpdates-REPO/items](https://github.com/NotEnoughUpdates/NotEnoughUpdates-REPO/items) as json",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemInfo"
+                },
+                "example": {
+                  "timestamp": 1650859206,
+                  "AATROX_BATPHONE": {
+                    "itemid": "minecraft:skull",
+                    "displayname": "§aMaddox Batphone",
+                    "nbttag": "{HideFlags:254,SkullOwner:{Id:\"cf814560-079b-3f43-98ce-d440ba66f2b3\",Properties:{textures:[0:{Value:\"eyJ0aW1lc3RhbXAiOjE1Njc5OTg1NDE4MDYsInByb2ZpbGVJZCI6IjQxZDNhYmMyZDc0OTQwMGM5MDkwZDU0MzRkMDM4MzFiIiwicHJvZmlsZU5hbWUiOiJNZWdha2xvb24iLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzkzMzZkN2NjOTVjYmY2Njg5ZjVlOGM5NTQyOTRlYzhkMWVmYzQ5NGE0MDMxMzI1YmI0MjdiYzgxZDU2YTQ4NGQifX19\"}]}},display:{Lore:[0:\"§6Ability: Whassup? §e§lRIGHT CLICK\",1:\"§7Lets you call §5Maddox§7, when\",2:\"§7he's not busy.\",3:\"\",4:\"§4☠ §cRequires §5Wolf Slayer 3\",5:\"§a§lUNCOMMON\"],Name:\"§aMaddox Batphone\"},ExtraAttributes:{id:\"AATROX_BATPHONE\"}}",
+                    "damage": 3,
+                    "lore": [
+                      "§6Ability: Whassup? §e§lRIGHT CLICK",
+                      "§7Lets you call §5Maddox§7, when",
+                      "§7he's not busy.",
+                      "",
+                      "§4☠ §cRequires §5Wolf Slayer 3",
+                      "§a§lUNCOMMON"
+                    ],
+                    "recipe": {
+                      "A1": "ENCHANTED_COBBLESTONE:1",
+                      "A2": "ENCHANTED_COBBLESTONE:1",
+                      "A3": "ENCHANTED_COBBLESTONE:1",
+                      "B1": "ENCHANTED_COBBLESTONE:1",
+                      "B2": "ENCHANTED_REDSTONE:1",
+                      "B3": "ENCHANTED_COBBLESTONE:1",
+                      "C1": "ENCHANTED_COBBLESTONE:1",
+                      "C2": "ENCHANTED_IRON:1",
+                      "C3": "ENCHANTED_COBBLESTONE:1"
+                    },
+                    "slayer_req": "WOLF_3",
+                    "internalname": "AATROX_BATPHONE",
+                    "clickcommand": "viewrecipe",
+                    "modver": "2.1.0-REL",
+                    "infoType": "WIKI_URL",
+                    "info": "https://hypixel-skyblock.fandom.com/wiki/Maddox_Batphone",
+                    "crafttext": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/auctions/{item}": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Auction information by id",
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "item",
+            "in": "path",
+            "description": "Item id found in ExtraAttributes",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "SUPERIOR_DRAGON_CHESTPLATE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemData"
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/bazaar": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Bazaar information",
+        "description": "Some bazaar information",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BazaarItem"
+                },
+                "example": {
+                  "RAW_BEEF": {
+                    "id": "RAW_BEEF",
+                    "name": "Raw Beef",
+                    "buyOrder": 640,
+                    "sellOrder": 15,
+                    "buyPrice": 5,
+                    "sellPrice": 2.8,
+                    "buyVolume": 3642375,
+                    "sellVolume": 533956
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/auctions/average": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Average price",
+        "description": "Shows the average price of an item in the auctions house",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                },
+                "example": {
+                  "PERFECT_HELMET_5": 2150400
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/auctions/lowestbins": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Lowestbin",
+        "description": "Shows the lowest bin of an item in the auctions house",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                },
+                "example": {
+                  "PERFECT_HELMET_5": 2150400
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/auctions": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Auction information",
+        "description": "Displays the raw file from maroapi db",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RawAuction"
+                },
+                "example": [
+                  {
+                    "_id": "61bcf6c291d31c9d3da9f015",
+                    "__v": 0,
+                    "auction": {
+                      "id": "RAW_BEEF",
+                      "name": "Raw Beef",
+                      "price": 535000,
+                      "seller": "68eb7e85fd1040a4a8bfcbc473d85a4c",
+                      "ending": 1651167193633,
+                      "count": 1,
+                      "hid": "HUB_CRYPTS_TRAVEL_SCROLL"
+                    },
+                    "id": "HUB_CRYPTS_TRAVEL_SCROLL",
+                    "sales": [
+                      {
+                        "prices": 525000,
+                        "count": 1
+                      },
+                      {
+                        "prices": 800000,
+                        "count": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/museum": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "List Museum items",
+        "description": "Shows which item can be put into the museum and in which category",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Museum"
+                },
+                "example": {
+                  "EDITOR_PENCIL": "Special"
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/npcprice": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "NPC Price",
+        "description": "Shows the sales value of the items in the NPC store",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                },
+                "example": {
+                  "PERFECT_HELMET_5": 2150400
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://hysky.de"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    },
+    "/api/raw/bazaar": {
+      "get": {
+        "tags": [
+          "SkyBlock"
+        ],
+        "summary": "Raw Bazaar information",
+        "description": "Raw Bazaar Information",
+        "responses": {
+          "200": {
+            "description": "A successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RawBazaarItem"
+                },
+                "example": [
+                  {
+                    "_id": "614ba102afe1ed4d9d5b5c40",
+                    "__v": 0,
+                    "buyOrder": 640,
+                    "buyPrice": 5,
+                    "buyVolume": 3642375,
+                    "id": "RAW_BEEF",
+                    "name": "Raw Beef",
+                    "sellOrder": 15,
+                    "sellPrice": 2.8,
+                    "sellVolume": 533956
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "servers": [
+        {
+          "url": "https://hysky.de"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "Item": {
+        "type": "object",
+        "properties": {
+          "HypixelID": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true,
+            "example": 500
+          }
+        }
+      },
+      "Museum": {
+        "type": "object",
+        "properties": {
+          "HypixelID": {
+            "type": "string"
+          }
+        }
+      },
+      "Networth": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Wohlhabend"
+          },
+          "total_networth": {
+            "type": "number",
+            "format": "double",
+            "example": 3457219664.604
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemInfo": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "description": "Last updated time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Timestamp"
+              }
+            ]
+          },
+          "HypixelID": {
+            "description": "Neuitems",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NeuItems"
+              }
+            ]
+          }
+        }
+      },
+      "ItemData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Hypixel Skyblock item id",
+            "example": "SUPERIOR_DRAGON_CHESTPLATE"
+          },
+          "seller_id": {
+            "type": "string",
+            "description": "ID of seller of item",
+            "example": "81e1030c1bb1490eabbd647c5724c1f7"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Lowest bin of the item",
+            "format": "int64",
+            "example": 8800000
+          }
+        }
+      },
+      "BazaarItem": {
+        "type": "object",
+        "properties": {
+          "HypixelID": {
+            "$ref": "#/components/schemas/BazaarItem_HypixelID"
+          }
+        }
+      },
+      "RawBazaarItem": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RawBazaarItem_inner"
+        }
+      },
+      "RawAuction": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RawAuction_inner"
+        }
+      },
+      "Timestamp": {
+        "type": "integer",
+        "format": "int64",
+        "example": 1650859206
+      },
+      "NeuItems": {
+        "type": "object",
+        "properties": {
+          "itemid": {
+            "type": "string",
+            "description": "Minecraft Skyblock item id"
+          },
+          "displayname": {
+            "type": "string",
+            "description": "Hypixel Skyblock item display name"
+          },
+          "nbttag": {
+            "type": "string",
+            "description": "Hypixel Skyblock item ExtraAtributes"
+          },
+          "damage": {
+            "type": "integer",
+            "description": "Damage in int",
+            "format": "int64"
+          },
+          "lore": {
+            "maxItems": 15,
+            "minItems": 1,
+            "type": "array",
+            "description": "Hypixel Skyblock item lore",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recipe": {
+            "$ref": "#/components/schemas/NeuItems_recipe"
+          },
+          "slayer_req": {
+            "type": "string",
+            "description": "Slayer requirement"
+          },
+          "internalname": {
+            "type": "string",
+            "description": "Hypixel id"
+          },
+          "infoType": {
+            "type": "string"
+          },
+          "info": {
+            "type": "string"
+          },
+          "crafttext": {
+            "type": "string"
+          }
+        }
+      },
+      "BazaarItem_HypixelID": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Hypixel Skyblock item id",
+            "example": "RAW_BEEF"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the item",
+            "example": "Raw Beef"
+          },
+          "buyOrders": {
+            "type": "integer",
+            "format": "int64",
+            "example": 640
+          },
+          "sellOrders": {
+            "type": "integer",
+            "format": "int64",
+            "example": 15
+          },
+          "buyPrice": {
+            "type": "number",
+            "format": "double",
+            "example": 5
+          },
+          "sellPrice": {
+            "type": "number",
+            "format": "double",
+            "example": 2.8
+          },
+          "buyVolume": {
+            "type": "integer",
+            "format": "int64",
+            "example": 3642375
+          },
+          "sellVolume": {
+            "type": "integer",
+            "format": "int64",
+            "example": 533956
+          }
+        },
+        "example": null
+      },
+      "RawBazaarItem_inner": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "buyOrders": {
+            "type": "integer",
+            "format": "int64",
+            "example": 640
+          },
+          "buyPrice": {
+            "type": "number",
+            "format": "double",
+            "example": 5
+          },
+          "buyVolume": {
+            "type": "integer",
+            "format": "int64",
+            "example": 3642375
+          },
+          "id": {
+            "type": "string",
+            "description": "Hypixel Skyblock item id",
+            "example": "RAW_BEEF"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the item",
+            "example": "Raw Beef"
+          },
+          "sellOrders": {
+            "type": "integer",
+            "format": "int64",
+            "example": 15
+          },
+          "sellPrice": {
+            "type": "number",
+            "format": "double",
+            "example": 2.8
+          },
+          "sellVolume": {
+            "type": "integer",
+            "format": "int64",
+            "example": 533956
+          }
+        }
+      },
+      "RawAuction_inner": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "auction": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Item ID generated by MaroApi"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the item"
+              },
+              "price": {
+                "type": "integer",
+                "description": "Price of the item",
+                "format": "int64"
+              },
+              "seller": {
+                "type": "string",
+                "description": "Seller id"
+              },
+              "ending": {
+                "type": "string",
+                "description": "Ending bin in Timestamp"
+              },
+              "count": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "hid": {
+                "type": "string",
+                "description": "Hypixel Skyblock item ID format"
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "Item ID generated by MaroApi"
+          },
+          "sales": {
+            "maxItems": 15,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "price": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "count": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NeuItems_recipe": {
+        "type": "object",
+        "properties": {
+          "A1": {
+            "type": "string"
+          },
+          "A2": {
+            "type": "string"
+          },
+          "A3": {
+            "type": "string"
+          },
+          "B1": {
+            "type": "string"
+          },
+          "B2": {
+            "type": "string"
+          },
+          "B3": {
+            "type": "string"
+          },
+          "C1": {
+            "type": "string"
+          },
+          "C2": {
+            "type": "string"
+          },
+          "C3": {
+            "type": "string"
+          }
+        },
+        "description": "Hypixel Skyblock item recipe",
+        "example": null
+      }
+    },
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "description": "Can be obtained by joining the Minecraft server `mc.hypixel.net` and using the command `/api`.\n",
+        "name": "API-Key",
+        "in": "header"
+      }
+    }
+  }
+}
